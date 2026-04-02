@@ -61,7 +61,9 @@ def _parse_llm_output(raw: str) -> dict[str, Any]:
     """Parse LLM output as YAML (stripping markdown fences if present)."""
     cleaned = re.sub(r"^```(?:yaml|json)?\s*\n?|\n?```$", "", raw.strip(), flags=re.MULTILINE).strip()
     try:
-        parsed: dict[str, Any] = yaml.safe_load(cleaned) or {}
+        parsed = yaml.safe_load(cleaned) or {}
+        if not isinstance(parsed, dict):
+            return {"_raw": cleaned, "_parse_error": True}
         return parsed
     except yaml.YAMLError:
         return {"_raw": cleaned, "_parse_error": True}
@@ -81,10 +83,24 @@ def run_one(
     Returns a result dict with scores, tokens, timing, cost.
     """
     case = load_case(case_name)
-    source_text = case["source_text"]
+    source_text = case.get("source_text", "")
+    source_pdf = case.get("source_pdf")
     ground_truth_path = CASES_DIR.parent / case["ground_truth"]
     relevant_classes = case.get("relevant_classes", schema_classes)
     relevant_sheets = case.get("relevant_sheets", excel_sheets)
+
+    # Resolve PDF path relative to datasets/ directory
+    pdf_paths: list[str] = []
+    if source_pdf:
+        pdf_path = CASES_DIR.parent / source_pdf
+        if not pdf_path.exists():
+            pdf_path = Path(source_pdf)  # try as absolute path
+        if not pdf_path.exists():
+            msg = f"PDF not found: {source_pdf}"
+            raise FileNotFoundError(msg)
+        pdf_paths.append(str(pdf_path.resolve()))
+        if not source_text:
+            source_text = f"[See attached PDF: {pdf_path.name}]"
 
     # Load ground truth
     with open(ground_truth_path) as f:
@@ -102,7 +118,7 @@ def run_one(
 
     # Run LLM
     adapter = LLMLibraryAdapter(model_name=model, system_prompt=prompt_data["system"])
-    adapter.add_message(prompt_data["prompt"])
+    adapter.add_message(prompt_data["prompt"], pdf_files=pdf_paths if pdf_paths else None)
 
     t0 = time.time()
     raw_response = adapter.generate()

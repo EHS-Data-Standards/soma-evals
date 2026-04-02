@@ -1,0 +1,57 @@
+# Eval case: Liu et al. (2024) — PM2.5 / CFTR pathway
+#
+# Source: Int J Med Sci. 2024;21(10):1929-1944
+# DOI: 10.7150/ijms.96777
+#
+# Ground truth: hand-curated from paper, validated against Excel serialization
+# Reference Excel: datasets/Liu2024_PM25_CFTR_SOMA.xlsx
+
+name: liu2024_cftr
+description: >
+  Extract CFTR function, gene expression, goblet cell, BALF/sputum,
+  and lung function assay data from Liu et al. (2024) on PM2.5 effects
+  on P2Y2R/CFTR pathway in Calu-3 cells and Balb/c mice.
+
+relevant_classes:
+  - Assay
+  - AssayOutputMeasurement
+  - CFTRFunctionAssay
+  - CFTRFunctionOutput
+  - GeneExpressionAssay
+  - GeneExpressionOutput
+  - GobletCellAssay
+  - GobletCellOutput
+  - BALFSputumAssay
+  - BALFSputumOutput
+  - LungFunctionAssay
+  - LungFunctionOutput
+  - StudySubject
+  - CellularSystem
+  - InVivoSubject
+  - Protocol
+  - ExposureCondition
+  - QuantityValue
+  - NamedEntity
+  - KeyEvent
+
+relevant_sheets:
+  - CFTRFunctionAssay
+  - CFTRFunctionOutput
+  - GeneExpressionAssay
+  - GeneExpressionOutput
+  - GobletCellAssay
+  - GobletCellOutput
+  - BALFSputumAssay
+  - BALFSputumOutput
+  - LungFunctionAssay
+  - LungFunctionOutput
+  - CellularSystem
+  - InVivoSubject
+  - Protocol
+  - ExposureCondition
+  - KeyEvent
+
+ground_truth: ground_truth/Container-liu2024-pm25-cftr.yaml
+
+# Point this at the PDF when you have it locally:
+source_pdf: ../soma/examples/pdfs/liu2024-pm25-cftr.pdf

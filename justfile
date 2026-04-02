@@ -1,3 +1,5 @@
+set dotenv-load
+
 # List all commands
 _default:
     @just --list
