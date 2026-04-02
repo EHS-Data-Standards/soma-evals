@@ -1,0 +1,48 @@
+# Model configuration for eval runs and cost estimation.
+#
+# `models:` — default models for eval suites.
+#   Names must match `uv run llm models list`.
+#   CBORG models use the cborg/ prefix (registered in extra-openai-models.yaml).
+#
+# `tiers:` — model selections for `just full-eval`.
+#
+# `pricing:` — approximate cost per 1M tokens [input_usd, output_usd].
+#   CBORG is free to LBL staff — pricing kept for comparison with direct API costs.
+
+models:
+  - gpt-4o-mini
+  - gpt-4o
+  - cborg/claude-opus-4-6
+  - cborg/claude-sonnet-4-6
+  - cborg/gemini-2.5-flash
+
+tiers:
+  cheap:
+    - gpt-4o-mini
+    - cborg/gemini-2.5-flash
+  standard:
+    - gpt-4o-mini
+    - gpt-4o
+    - cborg/gemini-2.5-flash
+    - cborg/claude-sonnet-4-6
+  full:
+    - gpt-4o-mini
+    - gpt-4o
+    - cborg/claude-opus-4-6
+    - cborg/claude-sonnet-4-6
+    - cborg/gemini-2.5-flash
+    - cborg/gemini-2.5-pro
+    - cborg/gemini-3-flash
+
+pricing:
+  # OpenAI
+  gpt-4o: [2.50, 10.00]
+  gpt-4o-mini: [0.15, 0.60]
+  # Anthropic
+  claude-opus-4-6: [15.00, 75.00]
+  claude-sonnet-4-6: [3.00, 15.00]
+  claude-haiku-4-5: [0.80, 4.00]
+  # Google
+  gemini-2.5-flash: [0.30, 2.50]
+  gemini-2.5-pro: [1.25, 10.00]
+  gemini-3-flash: [0.30, 2.50]

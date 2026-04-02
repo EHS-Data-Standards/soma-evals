@@ -1,0 +1,114 @@
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[project]
+name = "soma-evals"
+description = "Evaluation framework for schema-guided text extraction using the SOMA LinkML model."
+authors = [
+  {name = "Sierra Moxon", email = "smoxon@lbl.gov"},
+]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+dynamic = ["version"]
+
+dependencies = [
+  "click>=8.1",
+  "llm>=0.19",
+  "llm-claude-3>=0.11",
+  "llm-gemini>=0.29",
+  "linkml-runtime>=1.9.4",
+  "openpyxl>=3.1",
+  "pandas>=2.0",
+  "pyyaml>=6.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.11",
+  "pre-commit>=3.3",
+  "mypy>=1.19.1",
+  "deptry>=0.24.0",
+  "pip-audit>=2.10.0",
+  "pytest-cov>=7.0.0",
+  "pandas-stubs>=3.0.0.260204",
+  "types-pyyaml>=6.0.12.20250915",
+  "types-openpyxl>=3.1.5.20250306",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/soma_evals"]
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "pep440"
+fallback-version = "0.0.0"
+
+[tool.uv]
+constraint-dependencies = [
+  "linkml>=1.10.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short --durations=5"
+markers = ["api: tests requiring LLM API calls (excluded from CI)"]
+
+[tool.coverage.run]
+omit = [
+  "src/soma_evals/__main__.py",
+  "src/soma_evals/runner.py",
+  "src/soma_evals/compare.py",
+  "src/soma_evals/llm_adapter.py",
+  "src/soma_evals/pricing.py",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "I",   # isort
+  "W",   # pycodestyle warnings
+  "B",   # bugbear
+  "S",   # bandit (security)
+]
+fixable = ["ALL"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S603", "S607"]
+"datasets/**" = ["S311"]
+
+[tool.codespell]
+skip = [
+  "LICENSE",
+  "pyproject.toml",
+  "uv.lock",
+  "datasets/*",
+]
+quiet-level = 3
+
+[tool.mypy]
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.deptry]
+per_rule_ignores = {DEP002 = ["llm-claude-3", "llm-gemini", "pyyaml", "linkml-runtime", "pandas"]}
+
+[tool.typos.files]
+extend-exclude = [
+  "LICENSE",
+  "uv.lock",
+  "pyproject.toml",
+  "datasets/*",
+]
