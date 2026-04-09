@@ -12,6 +12,7 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - admonition
+  - pymdownx.details
   - toc:
       permalink: true
 
@@ -20,11 +21,9 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Overview:
-      - What & Why: overview/what-and-why.md
-      - Architecture: overview/architecture.md
   - Ablation Levels: ablation-levels.md
   - Models: models.md
   - Prompts: prompts.md
   - Running Evals: running-evals.md
+  - Architecture: overview/architecture.md
   - About: about.md

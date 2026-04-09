@@ -19,6 +19,7 @@ from soma_evals.schema_context import ABLATION_LEVELS, AblationLevel
 _REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 _RESULTS_DIR = _REPO_ROOT / "results"
 _MODELS_YAML = _REPO_ROOT / "models.yaml"
+_EXTRACT_YAML = _REPO_ROOT / "extract.yaml"
 
 
 def sanitize_model_name(model: str) -> str:
@@ -139,6 +140,14 @@ def run_level(
     """Run all models for a single ablation level and write run_metadata.yaml."""
     out_dir = Path(results_dir) if results_dir else _RESULTS_DIR
 
+    # Resolve template path once so every model uses the same validated path
+    if template_path is None:
+        template_path = _EXTRACT_YAML
+    template_path = Path(template_path).resolve()
+    if not template_path.exists():
+        msg = f"Prompt template not found: {template_path}"
+        raise FileNotFoundError(msg)
+
     click.echo(f"\n=== Level: {level.value} ===")
 
     # Extract PDF once for all models
@@ -183,7 +192,17 @@ def run_all_levels(
     template_path: str | Path | None = None,
     results_dir: str | Path | None = None,
 ) -> None:
-    """Run all ablation levels for all models."""
+    """Run all ablation levels for all models.
+
+    Each invocation creates a timestamped subdirectory under *results_dir*
+    so that previous results are never overwritten.
+    """
+    base_dir = Path(results_dir) if results_dir else _RESULTS_DIR
+    run_id = datetime.now(tz=timezone.utc).strftime("%Y-%m-%dT%H%M%SZ")
+    run_dir = base_dir / run_id
+    run_dir.mkdir(parents=True, exist_ok=True)
+    click.echo(f"Results directory: {run_dir}")
+
     for level in ABLATION_LEVELS:
         run_level(
             level,
@@ -192,5 +211,5 @@ def run_all_levels(
             paper_slug,
             schema_path=schema_path,
             template_path=template_path,
-            results_dir=results_dir,
+            results_dir=run_dir,
         )

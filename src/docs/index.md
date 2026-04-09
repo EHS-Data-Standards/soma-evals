@@ -1,89 +1,85 @@
----
-hide:
-  - navigation
-  - toc
----
+# soma-evals
 
-<div class="aop-hero" markdown>
+Schema-ablation evals for [SOMA](https://github.com/EHS-Data-Standards/soma) — measures how progressively richer LinkML schema context improves LLM-based structured extraction from scientific literature.
 
-# SOMA Evals
+## Prerequisites
 
-<p class="aop-subtitle">
-Schema-ablation evaluation framework for measuring how SOMA LinkML schema context
-improves LLM extraction of structured biological data from scientific papers.
-</p>
+- [uv](https://docs.astral.sh/uv/) (Python package manager)
+- [just](https://github.com/casey/just) (task runner)
+- Python 3.12+
 
-</div>
+## Setup
 
-<div class="aop-cards" markdown>
+```bash
+git clone https://github.com/EHS-Data-Standards/soma-evals.git
+cd soma-evals
+just setup
+```
 
-<div class="aop-card aop-card--green" markdown>
+### API keys
 
-### Schema Ablation Study
+Set keys via the `llm` key store **or** environment variables. Use whichever method you prefer — you only need keys for the providers whose models you plan to run.
 
-Test four cumulative levels of schema context to isolate the impact on extraction quality.
+**Option A — key store (recommended):**
 
-- Baseline (no schema)
-- Class names & descriptions
-- Full class + slot definitions
-- Complete with enumerations
+```bash
+uv run llm keys set openai       # paste your OpenAI key
+uv run llm keys set anthropic    # paste your Anthropic key
+uv run llm keys set gemini       # paste your Gemini key
+```
 
-[Learn more](ablation-levels.md){: .aop-btn .aop-btn--green }
+**Option B — `.env` file:**
 
-</div>
+```bash
+cp .env.example .env
+```
 
-<div class="aop-card aop-card--orange" markdown>
+Then edit `.env`:
 
-### Multi-Model Comparison
+```ini
+OPENAI_API_KEY=sk-your-key-here
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+GEMINI_API_KEY=AIyour-key-here
+```
 
-Compare extraction quality across frontier LLMs from OpenAI, Anthropic, and Google.
+> **CBORG users (LBNL staff):** Models prefixed with `cborg/` route through the CBORG proxy and are free for lab staff. Authentication is handled by CBORG — no extra API key is needed beyond your CBORG access.
 
-- GPT-4o & GPT-4o-mini
-- Claude Opus 4 & Sonnet 4
-- Gemini 2.5 Flash & Pro
+## Running evals
 
-[View models](models.md){: .aop-btn .aop-btn--outline }
+```bash
+just list-models        # show available models & tiers
+just run-all            # run all four ablation levels (standard tier)
+just run-baseline       # run a single level
+```
 
-</div>
+Run a specific tier or override the default paper:
 
-<div class="aop-card aop-card--blue" markdown>
+```bash
+just run-all cheap
+EVAL_PDF=my-paper.pdf EVAL_SLUG=my-slug just run-all
+```
 
-### Extraction Results
+### Ablation levels
 
-Browse structured YAML outputs showing how each model extracts assays, measurements, and protocols.
+| Level | Schema context provided |
+|-------|------------------------|
+| `baseline` | None — LLM relies on training knowledge only |
+| `class_names` | Class names, descriptions, and mappings |
+| `full_classes` | + slot definitions with ranges & cardinality |
+| `with_enums` | + enumeration values and ontology meanings |
 
-- Token usage & latency
-- Ontology annotation quality
-- Side-by-side comparisons
+See the [Ablation Levels](ablation-levels.md) page for full details on each level, the prompt context it injects, and links to example result YAML.
 
-[See results](results/baseline.md){: .aop-btn .aop-btn--blue }
+Results are written to `results/<level>/<model>/<paper>.yaml`.
 
-</div>
+## Tests & QC
 
-<div class="aop-card aop-card--purple" markdown>
+```bash
+just test       # run tests (no API calls)
+just coverage   # tests with coverage report
+just fix        # auto-fix lint/format (ruff)
+```
 
-### Run It Yourself
+## License
 
-Reproduce evaluations or add your own papers and models with a simple CLI.
-
-- `just run-baseline`
-- `just run-all`
-- Configurable tiers & models
-
-[Get started](running-evals.md){: .aop-btn .aop-btn--outline }
-
-</div>
-
-</div>
-
-## Quick Context
-
-This framework evaluates how well LLMs extract structured experimental data from scientific
-PDFs when given varying amounts of the [SOMA LinkML schema](https://github.com/EHS-Data-Standards/soma)
-as prompt context. The goal is to quantify whether providing schema definitions (class names,
-slot types, enumerations) measurably improves the quality, consistency, and ontology coverage
-of LLM-generated structured output.
-
-The test corpus currently uses [Montgomery et al. 2020](https://doi.org/10.1165/rcmb.2019-0454OC),
-a study on PM2.5-induced mucociliary remodeling in nasal epithelial cells, as the reference
-paper for extraction.
+MIT
