@@ -57,7 +57,7 @@ across models. Ontology IDs appear sporadically. Controlled vocabulary terms are
 | Output consistency | Low |
 
 **Results:** `results/baseline/<model>/<paper>.yaml`
-([browse on GitHub](https://github.com/sierra-moxon/soma-evals/tree/main/results/baseline))
+([browse on GitHub](https://github.com/EHS-Data-Standards/soma-evals/tree/main/results/baseline))
 
 **Next level:** [class_names](#level-2-class_names) adds class names, descriptions, and ontology mappings.
 
@@ -109,7 +109,7 @@ has ontology URIs to anchor them.
 | Output consistency | Low | **Medium** |
 
 **Results:** `results/class_names/<model>/<paper>.yaml`
-([browse on GitHub](https://github.com/sierra-moxon/soma-evals/tree/main/results/class_names))
+([browse on GitHub](https://github.com/EHS-Data-Standards/soma-evals/tree/main/results/class_names))
 
 **Previous level:** [baseline](#level-1-baseline) — no schema context at all.
 **Next level:** [full_classes](#level-3-full_classes) adds slot definitions with types and cardinality.
@@ -165,7 +165,7 @@ output that is structurally conformant with the SOMA schema.
 | Output consistency | Low | Medium | **High** |
 
 **Results:** `results/full_classes/<model>/<paper>.yaml`
-([browse on GitHub](https://github.com/sierra-moxon/soma-evals/tree/main/results/full_classes))
+([browse on GitHub](https://github.com/EHS-Data-Standards/soma-evals/tree/main/results/full_classes))
 
 **Previous level:** [class_names](#level-2-class_names) — class headers only, no slot details.
 **Next level:** [with_enums](#level-4-with_enums) adds enumeration values with ontology meanings.
@@ -217,7 +217,7 @@ schema guidance.
 | Output consistency | Low | Medium | High | **Highest** |
 
 **Results:** `results/with_enums/<model>/<paper>.yaml`
-([browse on GitHub](https://github.com/sierra-moxon/soma-evals/tree/main/results/with_enums))
+([browse on GitHub](https://github.com/EHS-Data-Standards/soma-evals/tree/main/results/with_enums))
 
 **Previous level:** [full_classes](#level-3-full_classes) — classes and slots, but no enum values.
 

@@ -1,6 +1,6 @@
 site_name: SOMA Evals
 site_description: Evaluation framework for schema-guided text extraction using the SOMA LinkML model.
-repo_url: https://github.com/sierra-moxon/soma-evals
+repo_url: https://github.com/EHS-Data-Standards/soma-evals
 docs_dir: docs
 
 theme:
