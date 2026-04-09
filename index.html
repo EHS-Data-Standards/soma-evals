@@ -12,7 +12,7 @@
       
       
       
-        <link rel="next" href="overview/what-and-why/">
+        <link rel="next" href="ablation-levels/">
       
       
         
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#quick-context" class="md-skip">
+        <a href="#soma-evals" class="md-skip">
           Skip to content
         </a>
       
@@ -183,9 +183,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -230,6 +228,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -272,6 +272,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -280,10 +282,88 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-context" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick Context
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running evals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running evals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablation-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ablation levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests-qc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests &amp; QC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License
       
     </span>
   </a>
@@ -293,116 +373,6 @@
     </ul>
   
 </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Overview
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="overview/what-and-why/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    What & Why
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="overview/architecture/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Architecture
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
       
     </li>
   
@@ -523,6 +493,33 @@
   
   
     <li class="md-nav__item">
+      <a href="overview/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="about/" class="md-nav__link">
         
   
@@ -551,9 +548,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -561,6 +556,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -570,10 +567,88 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#quick-context" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick Context
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        API keys
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-evals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running evals
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running evals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ablation-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ablation levels
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests-qc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests &amp; QC
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        License
       
     </span>
   </a>
@@ -594,111 +669,97 @@
               <article class="md-content__inner md-typeset">
                 
                   
-  
-
-
-
-  
-  
-
-
-  <h1>Home</h1>
-
-<div class="aop-hero" markdown>
-
-# SOMA Evals
-
-<p class="aop-subtitle">
-Schema-ablation evaluation framework for measuring how SOMA LinkML schema context
-improves LLM extraction of structured biological data from scientific papers.
-</p>
-
-</div>
-
-<div class="aop-cards" markdown>
-
-<div class="aop-card aop-card--green" markdown>
-
-### Schema Ablation Study
-
-Test four cumulative levels of schema context to isolate the impact on extraction quality.
-
-- Baseline (no schema)
-- Class names & descriptions
-- Full class + slot definitions
-- Complete with enumerations
-
-[Learn more](ablation-levels.md){: .aop-btn .aop-btn--green }
-
-</div>
-
-<div class="aop-card aop-card--orange" markdown>
-
-### Multi-Model Comparison
-
-Compare extraction quality across frontier LLMs from OpenAI, Anthropic, and Google.
-
-- GPT-4o & GPT-4o-mini
-- Claude Opus 4 & Sonnet 4
-- Gemini 2.5 Flash & Pro
-
-[View models](models.md){: .aop-btn .aop-btn--outline }
-
-</div>
-
-<div class="aop-card aop-card--blue" markdown>
-
-### Extraction Results
-
-Browse structured YAML outputs showing how each model extracts assays, measurements, and protocols.
-
-- Token usage & latency
-- Ontology annotation quality
-- Side-by-side comparisons
-
-[See results](results/baseline.md){: .aop-btn .aop-btn--blue }
-
-</div>
-
-<div class="aop-card aop-card--purple" markdown>
-
-### Run It Yourself
-
-Reproduce evaluations or add your own papers and models with a simple CLI.
-
-- `just run-baseline`
-- `just run-all`
-- Configurable tiers & models
-
-[Get started](running-evals.md){: .aop-btn .aop-btn--outline }
-
-</div>
-
-</div>
-
-<h2 id="quick-context">Quick Context<a class="headerlink" href="#quick-context" title="Permanent link">&para;</a></h2>
-<p>This framework evaluates how well LLMs extract structured experimental data from scientific
-PDFs when given varying amounts of the <a href="https://github.com/EHS-Data-Standards/soma">SOMA LinkML schema</a>
-as prompt context. The goal is to quantify whether providing schema definitions (class names,
-slot types, enumerations) measurably improves the quality, consistency, and ontology coverage
-of LLM-generated structured output.</p>
-<p>The test corpus currently uses <a href="https://doi.org/10.1165/rcmb.2019-0454OC">Montgomery et al. 2020</a>,
-a study on PM2.5-induced mucociliary remodeling in nasal epithelial cells, as the reference
-paper for extraction.</p>
-
-
-
-
-
 
 
   
   
 
 
+<h1 id="soma-evals">soma-evals<a class="headerlink" href="#soma-evals" title="Permanent link">&para;</a></h1>
+<p>Schema-ablation evals for <a href="https://github.com/EHS-Data-Standards/soma">SOMA</a> — measures how progressively richer LinkML schema context improves LLM-based structured extraction from scientific literature.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://docs.astral.sh/uv/">uv</a> (Python package manager)</li>
+<li><a href="https://github.com/casey/just">just</a> (task runner)</li>
+<li>Python 3.12+</li>
+</ul>
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/EHS-Data-Standards/soma-evals.git
+<span class="nb">cd</span><span class="w"> </span>soma-evals
+just<span class="w"> </span>setup
+</code></pre></div>
+<h3 id="api-keys">API keys<a class="headerlink" href="#api-keys" title="Permanent link">&para;</a></h3>
+<p>Set keys via the <code>llm</code> key store <strong>or</strong> environment variables. Use whichever method you prefer — you only need keys for the providers whose models you plan to run.</p>
+<p><strong>Option A — key store (recommended):</strong></p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>llm<span class="w"> </span>keys<span class="w"> </span><span class="nb">set</span><span class="w"> </span>openai<span class="w">       </span><span class="c1"># paste your OpenAI key</span>
+uv<span class="w"> </span>run<span class="w"> </span>llm<span class="w"> </span>keys<span class="w"> </span><span class="nb">set</span><span class="w"> </span>anthropic<span class="w">    </span><span class="c1"># paste your Anthropic key</span>
+uv<span class="w"> </span>run<span class="w"> </span>llm<span class="w"> </span>keys<span class="w"> </span><span class="nb">set</span><span class="w"> </span>gemini<span class="w">       </span><span class="c1"># paste your Gemini key</span>
+</code></pre></div>
+<p><strong>Option B — <code>.env</code> file:</strong></p>
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</code></pre></div>
+<p>Then edit <code>.env</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="na">OPENAI_API_KEY</span><span class="o">=</span><span class="s">sk-your-key-here</span>
+<span class="na">ANTHROPIC_API_KEY</span><span class="o">=</span><span class="s">sk-ant-your-key-here</span>
+<span class="na">GEMINI_API_KEY</span><span class="o">=</span><span class="s">AIyour-key-here</span>
+</code></pre></div>
+<blockquote>
+<p><strong>CBORG users (LBNL staff):</strong> Models prefixed with <code>cborg/</code> route through the CBORG proxy and are free for lab staff. Authentication is handled by CBORG — no extra API key is needed beyond your CBORG access.</p>
+</blockquote>
+<h2 id="running-evals">Running evals<a class="headerlink" href="#running-evals" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>just<span class="w"> </span>list-models<span class="w">        </span><span class="c1"># show available models &amp; tiers</span>
+just<span class="w"> </span>run-all<span class="w">            </span><span class="c1"># run all four ablation levels (standard tier)</span>
+just<span class="w"> </span>run-baseline<span class="w">       </span><span class="c1"># run a single level</span>
+</code></pre></div>
+<p>Run a specific tier or override the default paper:</p>
+<div class="highlight"><pre><span></span><code>just<span class="w"> </span>run-all<span class="w"> </span>cheap
+<span class="nv">EVAL_PDF</span><span class="o">=</span>my-paper.pdf<span class="w"> </span><span class="nv">EVAL_SLUG</span><span class="o">=</span>my-slug<span class="w"> </span>just<span class="w"> </span>run-all
+</code></pre></div>
+<h3 id="ablation-levels">Ablation levels<a class="headerlink" href="#ablation-levels" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Schema context provided</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>baseline</code></td>
+<td>None — LLM relies on training knowledge only</td>
+</tr>
+<tr>
+<td><code>class_names</code></td>
+<td>Class names, descriptions, and mappings</td>
+</tr>
+<tr>
+<td><code>full_classes</code></td>
+<td>+ slot definitions with ranges &amp; cardinality</td>
+</tr>
+<tr>
+<td><code>with_enums</code></td>
+<td>+ enumeration values and ontology meanings</td>
+</tr>
+</tbody>
+</table>
+<p>See the <a href="ablation-levels/">Ablation Levels</a> page for full details on each level, the prompt context it injects, and links to example result YAML.</p>
+<p>Results are written to <code>results/&lt;level&gt;/&lt;model&gt;/&lt;paper&gt;.yaml</code>.</p>
+<h2 id="tests-qc">Tests &amp; QC<a class="headerlink" href="#tests-qc" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>just<span class="w"> </span><span class="nb">test</span><span class="w">       </span><span class="c1"># run tests (no API calls)</span>
+just<span class="w"> </span>coverage<span class="w">   </span><span class="c1"># tests with coverage report</span>
+just<span class="w"> </span>fix<span class="w">        </span><span class="c1"># auto-fix lint/format (ruff)</span>
+</code></pre></div>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>MIT</p>
 
 
-  
+
+
+
+
+
+
+
 
 
 
