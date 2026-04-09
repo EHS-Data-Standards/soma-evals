@@ -39,6 +39,10 @@ dev = [
   "types-pyyaml>=6.0.12.20250915",
   "types-openpyxl>=3.1.5.20250306",
 ]
+docs = [
+  "mkdocs-material>=9.5",
+  "pymdown-extensions>=10.7",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/soma_evals"]

@@ -29,6 +29,11 @@ htmlcov/
 # Eval outputs
 results/
 
+# Generated docs
+docs/
+!src/docs/
+site/
+
 # OS
 .DS_Store
 Thumbs.db

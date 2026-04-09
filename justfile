@@ -67,6 +67,21 @@ run-all tier="standard":
 show-context:
     uv run python -m soma_evals show-context
 
+# --- Documentation ---
+
+# Generate docs (copy src/docs to docs/) and serve locally
+gen-doc:
+    rm -rf docs
+    cp -r src/docs docs
+
+# Serve docs locally for preview
+testdoc: gen-doc
+    uv run mkdocs serve
+
+# Deploy docs to GitHub Pages
+deploy: gen-doc
+    uv run mkdocs gh-deploy --force
+
 # --- Cleanup ---
 
 clean-cache:
@@ -76,4 +91,7 @@ clean-cache:
 clean-results:
     rm -rf results/
 
-clean-all: clean-cache clean-results
+clean-docs:
+    rm -rf docs site
+
+clean-all: clean-cache clean-results clean-docs
