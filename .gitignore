@@ -25,7 +25,7 @@ htmlcov/
 
 # Environment
 .env
-
+.env~
 # Eval outputs
 results/
 
