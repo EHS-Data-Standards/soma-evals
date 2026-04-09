@@ -44,24 +44,24 @@ pdf := env("EVAL_PDF", "rcmb.2019-0454OC.pdf")
 slug := env("EVAL_SLUG", "montgomery2020-pm25-mucociliary")
 
 # Run baseline ablation level (no schema context)
-run-baseline tier="standard":
-    uv run python -m soma_evals run --level baseline --tier {{tier}} --pdf {{pdf}} --paper-slug {{slug}}
+run-baseline tier="standard" *models="":
+    uv run python -m soma_evals run --level baseline {{if models == "" { "--tier " + tier } else { models } }} --pdf {{pdf}} --paper-slug {{slug}}
 
 # Run class_names ablation level
-run-class-names tier="standard":
-    uv run python -m soma_evals run --level class_names --tier {{tier}} --pdf {{pdf}} --paper-slug {{slug}}
+run-class-names tier="standard" *models="":
+    uv run python -m soma_evals run --level class_names {{if models == "" { "--tier " + tier } else { models } }} --pdf {{pdf}} --paper-slug {{slug}}
 
 # Run full_classes ablation level
-run-full-classes tier="standard":
-    uv run python -m soma_evals run --level full_classes --tier {{tier}} --pdf {{pdf}} --paper-slug {{slug}}
+run-full-classes tier="standard" *models="":
+    uv run python -m soma_evals run --level full_classes {{if models == "" { "--tier " + tier } else { models } }} --pdf {{pdf}} --paper-slug {{slug}}
 
 # Run with_enums ablation level
-run-with-enums tier="standard":
-    uv run python -m soma_evals run --level with_enums --tier {{tier}} --pdf {{pdf}} --paper-slug {{slug}}
+run-with-enums tier="standard" *models="":
+    uv run python -m soma_evals run --level with_enums {{if models == "" { "--tier " + tier } else { models } }} --pdf {{pdf}} --paper-slug {{slug}}
 
 # Run ALL ablation levels
-run-all tier="standard":
-    uv run python -m soma_evals run-all --tier {{tier}} --pdf {{pdf}} --paper-slug {{slug}}
+run-all tier="standard" *models="":
+    uv run python -m soma_evals run-all {{if models == "" { "--tier " + tier } else { models } }} --pdf {{pdf}} --paper-slug {{slug}}
 
 # Show schema context at each level (debugging)
 show-context:
