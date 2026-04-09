@@ -1,4 +1,4 @@
-"""Assemble prompts from templates, optional schema context, and format instructions."""
+"""Assemble prompts from the extract.yaml template, PDF text, and schema context."""
 
 from __future__ import annotations
 
@@ -7,74 +7,50 @@ from typing import Any
 
 import yaml
 
-_PROMPTS_DIR = Path(__file__).parent.parent.parent / "datasets" / "prompts"
+from soma_evals.schema_context import AblationLevel, build_schema_context
+
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
 
-def load_prompt_template(template_name: str = "extract") -> dict[str, Any]:
-    """Load a prompt template YAML file from datasets/prompts/.
+def load_prompt_template(template_path: str | Path | None = None) -> dict[str, Any]:
+    """Load the extract.yaml prompt template.
 
-    Returns dict with keys: system, prompt, and optional schema_preamble / format_preamble.
+    Returns:
+        dict with ``system`` and ``prompt`` keys.
     """
-    path = _PROMPTS_DIR / f"{template_name}.yaml"
-    if not path.exists():
-        msg = f"Prompt template not found: {path}"
-        raise FileNotFoundError(msg)
-    with open(path) as f:
-        data: dict[str, Any] = yaml.safe_load(f) or {}
-    return data
+    path = Path(template_path) if template_path else _REPO_ROOT / "extract.yaml"
+    with path.open() as f:
+        data = yaml.safe_load(f)
+    return {"system": data["system"], "prompt": data["prompt"]}
 
 
 def build_prompt(
-    source_text: str,
+    pdf_text: str,
+    level: AblationLevel,
     *,
-    template_name: str = "extract",
-    schema_context: str | None = None,
-    format_instructions: str | None = None,
+    schema_path: str | Path | None = None,
+    template_path: str | Path | None = None,
 ) -> dict[str, str]:
-    """Build a complete prompt from template + optional context.
-
-    Args:
-        source_text: the text to extract data from (paper abstract, TSV, etc.)
-        template_name: which template to load from datasets/prompts/
-        schema_context: schema description string (from schema_loader.schema_to_context_string)
-        format_instructions: format description string (from schema_loader.excel_to_format_string)
+    """Build the complete prompt for a given ablation level.
 
     Returns:
-        dict with 'system' and 'prompt' keys ready for the LLM adapter.
+        dict with ``system`` (system message) and ``prompt`` (user message).
     """
-    template = load_prompt_template(template_name)
-
-    system = template.get("system", "You are a scientific data extraction assistant.")
+    template = load_prompt_template(template_path)
+    schema_context = build_schema_context(level, schema_path)
 
     parts: list[str] = []
 
     if schema_context:
-        preamble = template.get("schema_preamble", "Use the following schema to guide your extraction:")
-        parts.append(preamble)
+        parts.append("## Schema Context\n")
         parts.append(schema_context)
         parts.append("")
 
-    if format_instructions:
-        preamble = template.get("format_preamble", "Structure your output according to this format:")
-        parts.append(preamble)
-        parts.append(format_instructions)
-        parts.append("")
-
-    prompt_template = template.get("prompt", "Extract structured data from the following text:\n\n{source_text}")
-    parts.append(prompt_template.format(source_text=source_text))
+    parts.append(template["prompt"].strip())
+    parts.append("\n## Source Text\n")
+    parts.append(pdf_text)
 
     return {
-        "system": system,
+        "system": template["system"],
         "prompt": "\n".join(parts),
     }
-
-
-def condition_label(schema: bool, fmt: bool) -> str:
-    """Return a human-readable condition label."""
-    if schema and fmt:
-        return "schema_and_format"
-    if schema:
-        return "schema_only"
-    if fmt:
-        return "format_only"
-    return "baseline"

@@ -65,9 +65,7 @@ markers = ["api: tests requiring LLM API calls (excluded from CI)"]
 omit = [
   "src/soma_evals/__main__.py",
   "src/soma_evals/runner.py",
-  "src/soma_evals/compare.py",
   "src/soma_evals/llm_adapter.py",
-  "src/soma_evals/pricing.py",
 ]
 
 [tool.ruff]

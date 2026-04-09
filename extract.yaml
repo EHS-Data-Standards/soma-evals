@@ -1,7 +1,4 @@
-# Prompt template for structured data extraction from scientific text.
-#
-# Placeholders: {source_text} is replaced with the input text.
-# schema_context and format_instructions are prepended when enabled.
+# Prompt template for structured data extraction from a scientific text.
 
 system: >
   You are a scientific data extraction assistant specializing in biological
@@ -9,10 +6,9 @@ system: >
   scientific text, identifying assays, measurements, protocols, study
   subjects, and experimental conditions.
 
-  Output ONLY valid YAML. Do not include explanations or markdown fences.
-
 prompt: |
   Extract structured assay and measurement data from the following scientific text.
+  Identify all assays, their measurements, study subjects, protocols, and
+  experimental conditions. Use ontology identifiers where possible (e.g.,
+  OBI, CHEBI, CL, UBERON, NCBITaxon, UO). Provide the extracted data in a structured format (e.g., YAML).
 
-  --- Source Text ---
-  {source_text}

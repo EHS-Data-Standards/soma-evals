@@ -27,9 +27,7 @@ htmlcov/
 .env
 
 # Eval outputs
-datasets/results/*.yaml
-datasets/results/*.tsv
-!datasets/results/.gitkeep
+results/
 
 # OS
 .DS_Store
